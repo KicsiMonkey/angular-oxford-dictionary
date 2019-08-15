@@ -1,0 +1,93 @@
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav position="end" mode="side" class="mat-elevation-z4" fixedInViewport="true">
+    <mat-nav-list class="history-sidenav">
+      <mat-list-item *ngFor="let pastEntry of getPastEntries()" (click)="onHistoryEntryClick(pastEntry)">
+        {{pastEntry}}
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <mat-button-toggle-group #group="matButtonToggleGroup" value="translator">
+          <mat-button-toggle value="translator" matTooltip="Translate a word or a phrase" matTooltipPosition="below"
+            (click)="switchModeTo(0)">
+            <mat-icon>translate</mat-icon>
+            <span> Translation</span>
+          </mat-button-toggle>
+          <mat-button-toggle value="thesaurus" matTooltip="See synonyms, antonyms and example sentences" matTooltipPosition="below"
+            (click)="switchModeTo(1)">
+            <mat-icon>notes</mat-icon>
+            <span> Learner's Dictionary</span>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+        <span class="toolbar-spacer"></span>
+        <mat-button-toggle color="accent" #historyButton (click)="sidenav.toggle()" matTooltip="See search history" matTooltipPosition="below">
+          <mat-icon *ngIf="!sidenav.opened">history</mat-icon>
+          <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+        </mat-button-toggle>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-card class="main-mat-card">
+      <!-- TODO: How do you bind enums? -->
+      <div [@slideInOutLeft]="isTranslatorActive()">
+        <app-translator></app-translator>
+      </div>
+      <div [@slideInOutRight]="isThesaurusActive()">
+        <app-thesaurus></app-thesaurus>
+      </div>
+
+      <!-- <app-thesaurus [hidden]="isThesaurusActive()"></app-thesaurus> -->
+      <!--        <div class="flex-container">
+          <div class="main-input-area">
+            
+            <div>
+              <mat-form-field >
+                <mat-label>Source language</mat-label>
+                <mat-select [(ngModel)]="selectedSourceLanguage">
+                  <mat-option *ngFor="let sourceLanguage of sourceLanguages" [value]="sourceLanguage.value">
+                    {{ sourceLanguage.viewValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="fill-horizontal" [color]="badInput ? 'warn' : 'primary'" appearance="fill" floatLabel="never">
+                <input matInput autofocus type="text" [(ngModel)]="entry" (keyup.enter)="onEnter()" (keyup.backspace)="onBackspace()" placeholder="Type here" />
+                <button mat-button *ngIf="entry" matSuffix mat-icon-button aria-label="Clear" (click)="entry=''; result=''; badInput=false" [color]="badInput?accent:primary">
+                  <mat-icon [style.color]="badInput ? 'red' : 'auto'">close</mat-icon>
+                </button>
+              </mat-form-field>
+              <button id="searchButton" mat-raised-button color="primary" (click)="searchButtonHandler()">
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+          </div>
+  
+          <div class="main-output-area">
+            <mat-form-field>
+              <mat-label>Target language</mat-label>
+              <mat-select [(ngModel)]="selectedTargetLanguage" placeholder="Target language">
+                <mat-option *ngFor="let targetLanguage of targetLanguages" [value]="targetLanguage.value">
+                  {{ targetLanguage.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
+            <mat-card class="fill-horizontal" *ngIf="result.length > 0 && entry.length > 0" [@slideInOut]>
+              <div style="white-space: pre-wrap">{{result}}</div>
+            </mat-card>
+          </div>
+        </div> -->
+
+    </mat-card>
+
+    <mat-toolbar class="footer" color="primary">
+      <span class="toolbar-spacer"></span>Powered by Oxford Dictionary
+    </mat-toolbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>

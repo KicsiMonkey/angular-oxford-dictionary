@@ -1,0 +1,34 @@
+<div class="flex-container">
+  <div class="main-input-area">
+
+    <div>
+      <mat-form-field>
+        <mat-label>Source language</mat-label>
+        <mat-select [(ngModel)]="selectedSourceLanguage">
+          <mat-option *ngFor="let sourceLanguage of sourceLanguages" [value]="sourceLanguage.id" [disabled]="sourceLanguage.id!='en'&&sourceLanguage.id!='es'">
+            {{ sourceLanguage.language }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="fill-horizontal" [color]="isBadInput ? 'warn' : 'primary'" appearance="fill" floatLabel="never">
+        <input matInput autofocus type="text" [(ngModel)]="entry" (keyup.enter)="onEnter()" (keyup.backspace)="onBackspace()" placeholder="Type here"
+        />
+        <button mat-button *ngIf="entry" matSuffix mat-icon-button aria-label="Clear" (click)="clearEntryAndResult()">
+          <mat-icon [style.color]="isBadInput ? 'red' : 'auto'">close</mat-icon>
+        </button>
+      </mat-form-field>
+      <button id="searchButton" mat-raised-button color="primary" (click)="searchButtonHandler()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="main-output-area">
+    <mat-progress-bar mode="query" *ngIf="isLoadingResult"></mat-progress-bar>
+    <mat-card class="fill-horizontal" *ngIf="result.length > 0 && entry.length > 0" [@slideInOutBottom]>
+      <div style="white-space: pre-wrap; text-align: justify" [innerHTML]="result"></div>
+    </mat-card>
+  </div>
+</div>

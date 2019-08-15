@@ -1,0 +1,15 @@
+{
+  "/od-api/*": {
+    "target":  {
+       "host": "od-api.oxforddictionaries.com",
+       "protocol": "https:",
+       "port": 443
+    },
+    "secure": false,
+    "pathRewrite": {
+      "^/od-api": "/api/v1"
+    },
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

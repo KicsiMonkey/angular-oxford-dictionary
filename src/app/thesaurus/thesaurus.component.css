@@ -1,0 +1,23 @@
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.flex-container > .main-input-area {
+  max-width: 25%;
+  min-width: 25%;
+}
+
+.flex-container > .main-output-area {
+  max-width: 50%;
+  min-width: 50%;
+}
+
+#searchButton {
+  min-width: 100%;
+}
+
+.fill-horizontal {
+  min-width: 100%;
+}

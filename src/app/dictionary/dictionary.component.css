@@ -1,0 +1,30 @@
+.history-sidenav {
+  min-width: 40vh;
+  max-width: 50vh;
+}
+
+.mat-toolbar {
+  min-height: 10vh;
+  justify-content: center;
+}  
+  
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+:not(.mat-button-toggle-checked).mat-button-toggle {
+  color: #fff;
+}
+
+.mat-button-toggle-group:not(.mat-button-toggle-standalone) {
+  flex: 0 1 auto;
+}
+
+.main-mat-card {
+  min-height: 64vh;
+} 
+  
+.footer {
+  min-height: 14vh;
+  font-size: 80%;
+}
